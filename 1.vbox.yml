@@ -1,5 +1,5 @@
 - name: Install Virtualbox on Windows
-  hosts: localhost
+  hosts: k8s
   gather_facts: no
   roles:
     - virtualbox

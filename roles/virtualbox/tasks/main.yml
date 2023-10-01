@@ -14,26 +14,3 @@
   win_command: Remove-Item -Path "C:\Temp\VirtualBox-Installer.exe" -Force
 
 
-
-- name: Create and Configure Virtual Machine
-  win_shell: |
-    cd /mnt/host/c/Program Files/Oracle/VirtualBox &&
-    ./vboxmanage.exe createvm --name {{ item }} --ostype "Debian_64" --register --basefolder 'd:/vbox1'
-    ./vboxmanage.exe modifyvm {{ item }} --ioapic on
-    ./vboxmanage.exe modifyvm {{ item }} --memory 2048 --vram 256 --cpus 2
-    ./vboxmanage.exe modifyvm {{ item }} --nic1 nat
-    ./vboxmanage.exe modifyvm {{ item }} --hda "d:/debian.vdi"
-    ./vboxmanage.exe storagectl {{ item }} --name "SATA Controller" --add sata --controller IntelAHCI --portcount 1 --bootable on
-    ./vboxmanage.exe storageattach {{ item }} --storagectl "SATA Controller" --device 0 --port 0 --type hdd --medium d:/s1.vdi
-    ./vboxmanage.exe startvm "{{ item }}" --type headless
-
-  with_items:
-    - server1
-    - server2
-    - server3
-
-#- name: Start the Virtual Machine
-#  win_shell: |
-#    "C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" startvm "MyVM"
-#  args:
-#    executable: powershell

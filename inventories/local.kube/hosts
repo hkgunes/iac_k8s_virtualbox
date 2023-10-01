@@ -1,15 +1,18 @@
-[localhost]
+[k8s]
 localhost ansible_connection=local
 
-[localhost:vars]
+[k8s:vars]
 ansible_user=laptop-t911ibnf\90541
 ansible_password="{{ 'Htc.1463' | string }}"
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
 
+[k8s:chidre]
+vms
+
 [vms]
-server1
-server2
+server1 manager=true
+server2 node=true
 server3
 
 [master]

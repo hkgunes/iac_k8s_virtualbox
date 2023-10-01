@@ -1,0 +1,6 @@
+- name: Install registry on Windows
+  hosts: 'jenkins'
+  remote_user: root
+  roles:
+    - docker
+    - registry
