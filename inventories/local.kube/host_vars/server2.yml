@@ -1,0 +1,12 @@
+---
+hostname: server2
+resources: 
+  cpu: 1
+  memory: 1024
+  name: server2
+  type: bridged 
+  host_interface: Realtek PCIe GbE Family Controller
+interfaces:
+  ip_address: 192.168.1.5
+  netmask: 255.255.255.0
+  gateway: 192.168.1.1

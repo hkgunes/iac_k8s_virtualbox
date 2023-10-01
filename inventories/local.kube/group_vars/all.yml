@@ -1,0 +1,5 @@
+image: E:/Terraform/test.box
+main_tf_dest: /cygdrive/e/test
+docker:
+  user: iactask
+  password: task.2023

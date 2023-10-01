@@ -1,0 +1,5 @@
+- name: Install Virtualbox on Windows
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - virtualbox

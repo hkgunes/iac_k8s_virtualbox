@@ -1,0 +1,40 @@
+- name: Install Kubernetes | K8s init
+  shell: |
+    sudo apt update && \
+    sudo apt install kubelet kubeadm kubectl -y && \
+    sudo apt-mark hold kubelet kubeadm kubectl
+
+- name:  Install Kubernetes Cluster with Kubeadm | K8s init
+  shell: |
+    sudo kubeadm init --control-plane-endpoint=k8s-master && \
+    mkdir -p $HOME/.kube && \
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && \
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  when: master
+
+- name:  settings node | K8s init
+  shell: |
+    sudo kubeadm join k8s-master:6443 --token 21nm87.x1lgd4jf0lqiiiau \
+      --discovery-token-ca-cert-hash sha256:28b503f1f2a2592678724c482776f04b445c5f99d76915552f14e68a24b78009
+  when: node
+
+- name: K8S Copy Deployment Calico File | K8s init
+  copy:
+    src: "init/files/calico.yml"
+    dest: /opt/project/calico.yml
+
+- name: k8s calico deployment | K8s init
+  shell: cd /opt/project && kubectl apply -f calico.yaml
+
+- name: k8s deployment | K8s init
+  shell: cd /opt/project && kubectl apply -f deployment.yaml
+
+- name: K8S Copy Deployment File | K8s init
+  copy:
+    src: "init/files/deployment.yml"
+    dest: /opt/project/deployment.yml
+
+- name: k8s deployment | K8s init
+  shell: cd /opt/project && kubectl apply -f deployment.yaml
+
+

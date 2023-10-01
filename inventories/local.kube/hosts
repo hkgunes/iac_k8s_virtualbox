@@ -1,0 +1,22 @@
+[localhost]
+localhost ansible_connection=local
+
+[localhost:vars]
+ansible_user=laptop-t911ibnf\90541
+ansible_password="{{ 'Htc.1463' | string }}"
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+
+[vms]
+server1
+server2
+server3
+
+[master]
+server1
+
+[node]
+server2
+
+[jenkins]
+server3

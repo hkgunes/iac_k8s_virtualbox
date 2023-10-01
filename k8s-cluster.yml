@@ -1,0 +1,7 @@
+- name: K3S Cluster Init | K3S
+  hosts: all:!localhost
+  remote_user: root
+  roles:
+    - k8s/prepare
+    - k8s/configure
+    - k8s/init
