@@ -4,30 +4,25 @@
     sudo apt install kubelet kubeadm kubectl -y && \
     sudo apt-mark hold kubelet kubeadm kubectl
 
+- name: k8s Configuration | Prepare Manager | Create Worker Node Join Token
+  shell: |
+    kubeadm init --control-plane-endpoint=k8s-master
+  ignore_errors: yes
+  register: worker_token
+
 - name:  Install Kubernetes Cluster with Kubeadm | K8s init
   shell: |
-    sudo kubeadm init --control-plane-endpoint=k8s-master && \
     mkdir -p $HOME/.kube && \
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && \
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
   when: master is defined and master
 
-
-- name: k8s Configuration | Prepare Manager | Create Worker Node Join Token
-  shell: |
-    kubeadm token create --print-join-command
-  ignore_errors: yes
-  register: worker_token
-
 - name: k8s Configuration | Prepare Worker Node | Join node
   command: "{{ worker_token.stdout  }}"
   ignore_errors: yes
 
-
 - name:  settings node | K8s init
-  shell: |
-    sudo kubeadm join k8s-master:6443 --token 21nm87.x1lgd4jf0lqiiiau \
-      --discovery-token-ca-cert-hash sha256:28b503f1f2a2592678724c482776f04b445c5f99d76915552f14e68a24b78009
+  shell: {{ worker_token.stdout  }}
   when: node is defined and node
 
 - name: K8S Copy Deployment Calico File | K8s init

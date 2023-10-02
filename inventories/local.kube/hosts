@@ -2,7 +2,7 @@
 localhost ansible_connection=local
 
 [localhost:vars]
-ansible_user=laptop-t911ibnf\90541
+ansible_user=laptop-t911ibnf
 ansible_password="{{ 'Htc.1463' | string }}"
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore

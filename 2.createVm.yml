@@ -1,5 +1,6 @@
 - name: Create VM's  on Virtualbox
-  hosts: k8s
-  gather_facts: no
+  vars:
+    ansible_python_interpreter: "auto"
+  hosts: localhost
   roles:
     - vm
