@@ -19,11 +19,11 @@ Projenin çalıştırılması için ;
 5. step: ansible-playbook -i inventories/local.kube/ 5.registry.yml
 
 6. step : bunun gerçekleştirilmesi için java da proje oluşturulup Dockerfile yazılmıştır. 
-   docker imaje için java kodu  : https://github.com/hkgunes/docker_app.git
-   pipelinenin oluşturulması için **roles > jenkins > files** içerisinde **jenkinsfile.groovy** dosyası var olup,pipeline adımlarını içerir.
+   docker image için java kodu  : https://github.com/hkgunes/docker_app.git
+   pipelinenin oluşturulması için **roles > jenkins > files** içerisinde **Jenkinsfile.groovy** dosyası var olup,pipeline adımlarını içerir.
    Sırasıyla ;
     - kodu githupdan çeker ve maven ile derler
-    - imaje oluşturulur 
-    - oluşsan imaji docker registry e push lar
-    - kubernetes oluşan imajı apply eder. **roles>k8s>init>templates>deployment.yml** içerisinde deploy edeceği imaje bilgisi bulunur. 
+    - image oluşturulur 
+    - oluşsan image docker registry'a push'lar
+    - kubernetes oluşan image apply eder. **roles>k8s>init>templates>deployment.yml** içerisinde deploy edeceği image bilgisi bulunur. 
     
