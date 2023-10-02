@@ -26,16 +26,16 @@
   when: node is defined and node
 
 - name: K8S Copy Deployment Calico File | K8s init
-  copy:
-    src: "init/files/calico.yml"
+  template:
+    src: "calico.yml"
     dest: /opt/project/calico.yml
 
 - name: k8s calico deployment | K8s init
   shell: cd /opt/project && kubectl apply -f calico.yaml
 
 - name: K8S Copy Deployment File | K8s init
-  copy:
-    src: "init/files/deployment.yml"
+  template:
+    src: "deployment.yml"
     dest: /opt/project/deployment.yml
 
 - name: k8s deployment | K8s init

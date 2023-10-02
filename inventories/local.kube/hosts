@@ -1,12 +1,25 @@
+[win]
+LAPTOP-T911IBNF ansible_host=192.168.1.25
+
+[win:vars]
+ansible_user=htckaraarslan@outlook.com
+ansible_password=Htc.1463
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_port=5985
+ansible_winrm_server_cert_validation=ignore
+
 [localhost]
-localhost ansible_connection=local
+ansible_host=192.168.1.25
 
 [localhost:vars]
 ansible_user=laptop-t911ibnf
 ansible_password="{{ 'Htc.1463' | string }}"
 ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_port=5985
 ansible_winrm_server_cert_validation=ignore
-
+ansible_
 
 [vms]
 server1
