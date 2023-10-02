@@ -2,5 +2,5 @@
 hostname: server1
 gateway: 192.168.1.1
 interfaces:
-  ip_address: 192.168.1.2
+  ip_address: 192.168.1.40
   netmask: 255.255.255.0

@@ -1,5 +1,5 @@
 - name: k8s create
-  hosts: 'all:!localhost'
+  hosts: k8s
   remote_user: root
   roles:
     - k8s/prepare

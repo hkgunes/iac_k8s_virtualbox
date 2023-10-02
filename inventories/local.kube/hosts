@@ -1,25 +1,21 @@
-[k8s]
+[localhost]
 localhost ansible_connection=local
 
-[k8s:vars]
+[localhost:vars]
 ansible_user=laptop-t911ibnf\90541
 ansible_password="{{ 'Htc.1463' | string }}"
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
 
-[k8s:chidre]
-vms
 
 [vms]
-server1 manager=true
-server2 node=true
+server1
+server2
 server3
 
-[master]
-server1
-
-[node]
-server2
+[k8s]
+server1 manager=true ansible_host=192.168.1.40 ansible_user=root ansible_password=osboxes.org
+server2 node=true ansible_host=192.168.1.39 ansible_user=root ansible_password=123
 
 [jenkins]
 server3
