@@ -1,7 +1,4 @@
 ---
-- name: deneme
-  win_shell: "xdfdf"
-
 - name: Download VirtualBox Installer
   win_command: "powershell -Command \"Invoke-WebRequest -Uri 'https://download.virtualbox.org/virtualbox/6.1.28/VirtualBox-6.1.28-147628-Win.exe' -OutFile 'C:\\k8s\\VirtualBox-Installer.exe'\""
 

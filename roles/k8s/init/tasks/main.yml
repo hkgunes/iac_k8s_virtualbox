@@ -6,23 +6,24 @@
 
 - name: k8s Configuration | Prepare Manager | Create Worker Node Join Token
   shell: |
-    kubeadm init --control-plane-endpoint=k8s-master
+    kubeadm init --control-plane-endpoint=master
   ignore_errors: yes
   register: worker_token
+  when: manager is defined and manager
+
+- name: Display the captured output
+  debug:
+    var: worker_token.stdout
 
 - name:  Install Kubernetes Cluster with Kubeadm | K8s init
   shell: |
     mkdir -p $HOME/.kube && \
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && \
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
-  when: master is defined and master
-
-- name: k8s Configuration | Prepare Worker Node | Join node
-  command: "{{ worker_token.stdout  }}"
-  ignore_errors: yes
+  when: manager is defined and manager
 
 - name:  settings node | K8s init
-  shell: {{ worker_token.stdout  }}
+  shell: "{{ worker_token.stdout_lines }}"
   when: node is defined and node
 
 - name: K8S Copy Deployment Calico File | K8s init

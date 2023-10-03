@@ -1,25 +1,28 @@
+[localhost]
+192.168.1.25
+
+[localhost:vars]
+ansible_user='htckaraarslan@outlook.com'
+ansible_password='Htc.1463'
+ansible_connection=winrm
+ansible_port=5985
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
+
+
 [win]
-LAPTOP-T911IBNF ansible_host=192.168.1.25
+ansible_host=192.168.144.1
 
 [win:vars]
 ansible_user=htckaraarslan@outlook.com
-ansible_password=Htc.1463
+ansible_password="Htc.1463"
 ansible_connection=winrm
 ansible_winrm_transport=basic
+ansible_winrm_scheme=http
 ansible_port=5985
 ansible_winrm_server_cert_validation=ignore
 
-[localhost]
-ansible_host=192.168.1.25
 
-[localhost:vars]
-ansible_user=laptop-t911ibnf
-ansible_password="{{ 'Htc.1463' | string }}"
-ansible_connection=winrm
-ansible_winrm_transport=basic
-ansible_port=5985
-ansible_winrm_server_cert_validation=ignore
-ansible_
 
 [vms]
 server1
@@ -31,4 +34,4 @@ server1 manager=true ansible_host=192.168.1.40 ansible_user=root ansible_passwor
 server2 node=true ansible_host=192.168.1.39 ansible_user=root ansible_password=123
 
 [jenkins]
-server3
+server3 ansible_host=192.168.1.41 ansible_user=root ansible_password=osboxes.org
